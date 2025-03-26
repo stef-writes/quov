@@ -78,6 +78,9 @@ body {
 .subtitle {
     font-size: 1.2rem;
     color: #b0b0b0;
+    font-style: italic;
+    margin-bottom: 2rem;
+    line-height: 1.6;
 }
 
 /* Content sections */
@@ -90,12 +93,6 @@ body {
     max-width: 800px;
     margin: 0 auto;
     text-align: center;
-}
-
-.content h2 {
-    margin-bottom: 2rem;
-    color: #ffffff;
-    font-size: 1.8rem;
 }
 
 /* Grid layouts */
