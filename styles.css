@@ -87,6 +87,15 @@ body {
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     border: 1px solid #2a2a2a;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.content h2 {
+    margin-bottom: 2rem;
+    color: #ffffff;
+    font-size: 1.8rem;
 }
 
 /* Grid layouts */
@@ -95,6 +104,7 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     margin-top: 2rem;
+    justify-items: center;
 }
 
 /* Footer */
