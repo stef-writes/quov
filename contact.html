@@ -50,14 +50,16 @@
 
                 <div class="contact-form">
                     <h2>Send a Message</h2>
-                    <form action="#" method="POST">
+                    <form action="#" method="POST" onsubmit="return validateForm()">
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" id="name" name="name" required>
+                            <span id="nameError" class="error-message"></span>
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" id="email" name="email" required>
+                            <span id="emailError" class="error-message"></span>
                         </div>
                         <div class="form-group">
                             <label for="subject">Subject</label>
@@ -73,5 +75,39 @@
             </div>
         </section>
     </main>
+
+    <script>
+        function validateForm() {
+            let valid = true;
+
+            // Name validation
+            const name = document.getElementById("name").value;
+            if (name === "") {
+                document.getElementById("nameError").innerHTML = "Name is required";
+                valid = false;
+            } else {
+                document.getElementById("nameError").innerHTML = "";
+            }
+
+            // Email validation
+            const email = document.getElementById("email").value;
+            if (email === "") {
+                document.getElementById("emailError").innerHTML = "Email is required";
+                valid = false;
+            } else if (!isValidEmail(email)) {
+                document.getElementById("emailError").innerHTML = "Invalid email format";
+                valid = false;
+            } else {
+                document.getElementById("emailError").innerHTML = "";
+            }
+
+            return valid;
+        }
+
+        function isValidEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+    </script>
 </body>
 </html> 
