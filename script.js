@@ -11,16 +11,16 @@ const projects = {
         technologies: ["Python", "JavaScript", "VSCode"]
     },
     project2: {
-        title: "E-commerce Platform Redesign",
-        description: "A complete overhaul of an existing e-commerce platform focusing on user experience and modern design principles. The project implemented a responsive design system, improved checkout flow, and added advanced filtering capabilities. The new design increased conversion rates by 40% and reduced cart abandonment by 25%.",
+        title: "Coming Soon!",
+        description: "...",
         images: ["https://via.placeholder.com/800x400/2a2a2a/ffffff?text=E-commerce+Homepage", "https://via.placeholder.com/800x400/2a2a2a/ffffff?text=Product+Listing", "https://via.placeholder.com/800x400/2a2a2a/ffffff?text=Checkout+Process"],
-        technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Prisma", "PostgreSQL"]
+        technologies: ["...", "...", "...", "...", "..."]
     },
     project3: {
-        title: "Data Analytics Dashboard",
-        description: "An interactive dashboard for visualizing complex business metrics and KPIs. Built using modern web technologies, the dashboard features real-time data updates, custom filtering options, and export capabilities. The system processes over 1 million data points daily and provides insights through intuitive visualizations.",
+        title: "Coming Soon!",
+        description: "...",
         images: ["https://via.placeholder.com/800x400/2a2a2a/ffffff?text=Dashboard+Overview", "https://via.placeholder.com/800x400/2a2a2a/ffffff?text=Performance+Metrics", "https://via.placeholder.com/800x400/2a2a2a/ffffff?text=Data+Visualization"],
-        technologies: ["React", "D3.js", "Node.js", "Redis", "AWS"]
+        technologies: ["...", "...", "...", "...", "..."]
     }
 };
 
