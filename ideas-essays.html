@@ -5,93 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ideas & Essays | Personal Website</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        /* Modal - Hidden by default */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.4);
-        }
-
-        .modal-content {
-            background-color: #2a2a2a;
-            margin: 15% auto;
-            padding: 40px;
-            width: 60%;
-            max-width: 800px;
-            border-radius: 8px;
-        }
-
-        .close {
-            color: #999;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: #fff;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        /* Essay content styling */
-        .essay-content {
-            font-family: Georgia, serif;
-            line-height: 1.6;
-            color: #e0e0e0;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .essay-content h2 {
-            font-size: 2rem;
-            margin: 2.5rem 0 1.5rem;
-            font-weight: 600;
-            color: #fff;
-        }
-
-        .essay-content h3 {
-            font-size: 1.5rem;
-            margin: 2rem 0 1rem;
-            font-weight: 600;
-            color: #fff;
-        }
-
-        .essay-content p {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
-
-        .essay-content strong {
-            font-weight: 600;
-            color: #fff;
-        }
-
-        .essay-content ul {
-            margin: 1.5rem 0;
-            padding-left: 2rem;
-        }
-
-        .essay-content li {
-            margin-bottom: 0.75rem;
-        }
-
-        #essayTitle {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            color: #fff;
-            font-weight: 600;
-        }
-    </style>
 </head>
 <body>
     <nav class="main-nav">
@@ -116,72 +29,13 @@
             <div class="ideas-essays-grid">
                 <div class="ideas-section">
                     <h2>Latest Essay</h2>
-                    <div class="grid">
-                        <div class="content-card">
-                            <h3>The Relational Mind</h3>
-                            <p>A philosophical exploration of perception, knowledge, and the nature of experience</p>
-                            <button class="button" id="openEssay">Read More</button>
-                        </div>
+                    <div class="content-card">
+                        <h3>The Relational Mind</h3>
+                        <p>A philosophical exploration of perception, knowledge, and the nature of experience</p>
                     </div>
                 </div>
             </div>
         </section>
     </main>
-
-    <!-- Modal -->
-    <div id="essayModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2 id="essayTitle"></h2>
-            <div id="essayContent" class="essay-content"></div>
-        </div>
-    </div>
-
-    <script>
-        // Get the modal
-        var modal = document.getElementById("essayModal");
-
-        // Get the button that opens the modal
-        var btn = document.getElementById("openEssay");
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-
-        // When the user clicks the button, open the modal and load essay
-        btn.onclick = function() {
-            loadEssay('the-relational-mind');
-        }
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-
-        async function loadEssay(essayId) {
-            try {
-                const response = await fetch(`essays/${essayId}.txt`);
-                const text = await response.text();
-                
-                // Split into title and content
-                const lines = text.split('\n');
-                const title = lines[0];
-                const content = lines.slice(1).join('\n');
-                
-                document.getElementById('essayTitle').textContent = title;
-                document.getElementById('essayContent').innerHTML = content;
-                modal.style.display = "block";
-            } catch (error) {
-                console.error('Error loading essay:', error);
-                alert('Error loading essay. Please try again later.');
-            }
-        }
-    </script>
 </body>
 </html> 

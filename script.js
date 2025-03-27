@@ -4,19 +4,19 @@ const projects = {
         title: "AI Image Recognition System",
         description: "A sophisticated machine learning project that can identify and classify objects in real-time using computer vision techniques. The system uses a custom-trained neural network to achieve 95% accuracy in object detection across 1000 different categories. Key features include real-time processing, multi-object detection, and confidence scoring for each prediction.",
         images: ["https://via.placeholder.com/800x400/2a2a2a/ffffff?text=AI+Image+Recognition", "https://via.placeholder.com/800x400/2a2a2a/ffffff?text=Real-time+Processing", "https://via.placeholder.com/800x400/2a2a2a/ffffff?text=Neural+Network+Architecture"],
-        technologies: ["Python", "TensorFlow", "OpenCV", "Deep Learning"]
+        technologies: ["Python", "PyTorch", "OpenCV", "CUDA", "Docker"]
     },
     project2: {
         title: "E-commerce Platform Redesign",
         description: "A complete overhaul of an existing e-commerce platform focusing on user experience and modern design principles. The project implemented a responsive design system, improved checkout flow, and added advanced filtering capabilities. The new design increased conversion rates by 40% and reduced cart abandonment by 25%.",
         images: ["https://via.placeholder.com/800x400/2a2a2a/ffffff?text=E-commerce+Homepage", "https://via.placeholder.com/800x400/2a2a2a/ffffff?text=Product+Listing", "https://via.placeholder.com/800x400/2a2a2a/ffffff?text=Checkout+Process"],
-        technologies: ["React", "Node.js", "MongoDB", "Express"]
+        technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Prisma", "PostgreSQL"]
     },
     project3: {
         title: "Data Analytics Dashboard",
         description: "An interactive dashboard for visualizing complex business metrics and KPIs. Built using modern web technologies, the dashboard features real-time data updates, custom filtering options, and export capabilities. The system processes over 1 million data points daily and provides insights through intuitive visualizations.",
         images: ["https://via.placeholder.com/800x400/2a2a2a/ffffff?text=Dashboard+Overview", "https://via.placeholder.com/800x400/2a2a2a/ffffff?text=Performance+Metrics", "https://via.placeholder.com/800x400/2a2a2a/ffffff?text=Data+Visualization"],
-        technologies: ["D3.js", "Vue.js", "Python", "PostgreSQL"]
+        technologies: ["React", "D3.js", "Node.js", "Redis", "AWS"]
     }
 };
 

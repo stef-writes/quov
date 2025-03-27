@@ -22,15 +22,67 @@
     <main class="container">
         <header class="hero">
             <h1>Welcome</h1>
-            <p class="subtitle">Exploring ideas, sharing knowledge, and building projects</p>
+            <p>Stefano is obsessed with the intersection of philosophy, neuroscience and machine learning.  He is passionate about re-imagining how we engineer products. </p>
         </header>
 
         <section class="content">
-            <div class="intro-section">
-                <h2>About Me</h2>
-                <p>Welcome to my personal website! I'm passionate about exploring new ideas, writing about interesting topics, and creating meaningful projects. This space serves as a platform to share my thoughts, showcase my work, and connect with others who share similar interests.</p>
+            <div class="quote-carousel-container">
+                <div class="quote-slide fade">
+                    <blockquote>
+                        "Whereof one cannot speak, one must be silent." - Ludwig Wittgenstein
+                    </blockquote>
+                </div>
+                <div class="quote-slide fade">
+                    <blockquote>
+                        "The mind of man is capable of anything-because everything is in it, all the past as well as all the future." - Joseph Conrad
+                    </blockquote>
+                </div>
+                <div class="quote-slide fade">
+                    <blockquote>
+                        "This time, like all times, is a very good one, if we but know what to do with it." - Ralph Waldo Emerson
+                    </blockquote>
+                </div>
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                <div class="dot-container">
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                    <span class="dot" onclick="currentSlide(3)"></span>
+                </div>
             </div>
         </section>
     </main>
+
+    <script>
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            var i;
+            var slides = document.getElementsByClassName("quote-slide");
+            var dots = document.getElementsByClassName("dot");
+            
+            if (n > slides.length) {slideIndex = 1}    
+            if (n < 1) {slideIndex = slides.length}
+            
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            
+            slides[slideIndex-1].style.display = "block";  
+            dots[slideIndex-1].className += " active";
+        }
+    </script>
 </body>
 </html> 
