@@ -1,3 +1,10 @@
+# Ignore video files
+*.mov
+*.mp4
+*.avi
+*.wmv
+
+# Ignore macOS system files
 .DS_Store
 node_modules/
 .env
