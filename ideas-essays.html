@@ -5,6 +5,93 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ideas & Essays | Personal Website</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .modal-content {
+            background-color: #2a2a2a;
+            margin: 5% auto;
+            padding: 40px;
+            width: 80%;
+            max-width: 800px;
+            max-height: 80vh;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            overflow-y: auto;
+        }
+
+        .close {
+            color: #999;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #fff;
+        }
+
+        /* Essay content styling */
+        .essay-content {
+            font-family: Georgia, serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .essay-content h2 {
+            font-size: 2rem;
+            margin: 2.5rem 0 1.5rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .essay-content h3 {
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .essay-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .essay-content strong {
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .essay-content ul {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+
+        .essay-content li {
+            margin-bottom: 0.75rem;
+        }
+
+        #essayTitle {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #fff;
+            font-weight: 600;
+        }
+    </style>
 </head>
 <body>
     <nav class="main-nav">
@@ -28,33 +115,12 @@
         <section class="content">
             <div class="ideas-essays-grid">
                 <div class="ideas-section">
-                    <h2>Ideas</h2>
+                    <h2>Latest Essay</h2>
                     <div class="grid">
                         <div class="content-card">
-                            <h3>Latest Ideas</h3>
-                            <p>Thoughts and concepts I'm currently exploring</p>
-                            <a href="#" class="button">Read More</a>
-                        </div>
-                        <div class="content-card">
-                            <h3>Featured Ideas</h3>
-                            <p>Notable ideas and concepts from the past</p>
-                            <a href="#" class="button">Read More</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="essays-section">
-                    <h2>Essays</h2>
-                    <div class="grid">
-                        <div class="content-card">
-                            <h3>Recent Essays</h3>
-                            <p>Latest written explorations and analyses</p>
-                            <a href="#" class="button">Read More</a>
-                        </div>
-                        <div class="content-card">
-                            <h3>Popular Essays</h3>
-                            <p>Most read and discussed essays</p>
-                            <a href="#" class="button">Read More</a>
+                            <h3>The Relational Mind</h3>
+                            <p>A philosophical exploration of perception, knowledge, and the nature of experience</p>
+                            <button class="button" onclick="loadEssay('the-relational-mind')">Read More</button>
                         </div>
                     </div>
                 </div>
@@ -62,6 +128,54 @@
         </section>
     </main>
 
-    <script src="script.js"></script>
+    <!-- Essay Modal -->
+    <div id="essayModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('essayModal')">&times;</span>
+            <h2 id="essayTitle"></h2>
+            <div id="essayContent" class="essay-content"></div>
+        </div>
+    </div>
+
+    <script>
+        async function loadEssay(essayId) {
+            try {
+                const response = await fetch(`essays/${essayId}.txt`);
+                const text = await response.text();
+                
+                // Convert markdown to HTML
+                let content = text
+                    .replace(/###\s+(.*?)$/gm, '<h3>$1</h3>')
+                    .replace(/##\s+(.*?)$/gm, '<h2>$1</h2>')
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                    .replace(/^\s*-\s+(.*?)$/gm, '<li>$1</li>')
+                    .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+                
+                // Extract title and content
+                const lines = content.split('\n');
+                const title = lines[0];
+                content = lines.slice(1).join('\n');
+                
+                document.getElementById('essayTitle').textContent = title;
+                document.getElementById('essayContent').innerHTML = content;
+                document.getElementById('essayModal').style.display = "block";
+            } catch (error) {
+                console.error('Error loading essay:', error);
+                alert('Error loading essay. Please try again later.');
+            }
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html> 
