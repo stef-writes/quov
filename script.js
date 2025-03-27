@@ -1,10 +1,14 @@
 // Project data
 const projects = {
     project1: {
-        title: "AI Image Recognition System",
-        description: "A sophisticated machine learning project that can identify and classify objects in real-time using computer vision techniques. The system uses a custom-trained neural network to achieve 95% accuracy in object detection across 1000 different categories. Key features include real-time processing, multi-object detection, and confidence scoring for each prediction.",
-        images: ["https://via.placeholder.com/800x400/2a2a2a/ffffff?text=AI+Image+Recognition", "https://via.placeholder.com/800x400/2a2a2a/ffffff?text=Real-time+Processing", "https://via.placeholder.com/800x400/2a2a2a/ffffff?text=Neural+Network+Architecture"],
-        technologies: ["Python", "PyTorch", "OpenCV", "CUDA", "Docker"]
+        title: "Basic Search Engine",
+        description: "This is a basic search engine program that is comprised of: Search Index, Search Algorithm, Web Crawler, and a Command-Line Interface (CLI) Module",
+        images: [
+            "assets/search-engine-add.png",  // Screenshot of adding website
+            "assets/search-engine-results.png",  // Screenshot of search results
+            "assets/search-engine-details.png"  // Screenshot of site details
+        ],
+        technologies: ["Python", "JavaScript", "VSCode"]
     },
     project2: {
         title: "E-commerce Platform Redesign",
