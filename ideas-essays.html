@@ -169,19 +169,10 @@
                 const response = await fetch(`essays/${essayId}.txt`);
                 const text = await response.text();
                 
-                // Convert markdown to HTML
-                let content = text
-                    .replace(/###\s+(.*?)$/gm, '<h3>$1</h3>')
-                    .replace(/##\s+(.*?)$/gm, '<h2>$1</h2>')
-                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                    .replace(/\*(.*?)\*/g, '<em>$1</em>')
-                    .replace(/^\s*-\s+(.*?)$/gm, '<li>$1</li>')
-                    .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
-                
-                // Extract title and content
-                const lines = content.split('\n');
+                // Split into title and content
+                const lines = text.split('\n');
                 const title = lines[0];
-                content = lines.slice(1).join('\n');
+                const content = lines.slice(1).join('\n');
                 
                 document.getElementById('essayTitle').textContent = title;
                 document.getElementById('essayContent').innerHTML = content;
