@@ -1,40 +1,65 @@
-// Get the modals
-var modals = document.getElementsByClassName("modal");
-
-// Get the buttons that opens the modals
-var buttons = document.getElementsByClassName("button");
-
-// Get the <span> elements that closes the modals
-var spans = document.getElementsByClassName("close");
-
-// When the user clicks the button, open the modal 
-for (var i = 0; i < buttons.length; i++) {
-    buttons[i].onclick = function() {
-        var projectId = this.getAttribute('onclick').match(/'([^']+)'/)[1];
-        document.getElementById(projectId + 'Modal').style.display = "block";
-        showSlides(1); // Reset carousel to first slide
+// Project data
+const projects = {
+    project1: {
+        title: "AI Image Recognition System",
+        description: "A sophisticated machine learning project that can identify and classify objects in real-time using computer vision techniques. The system uses a custom-trained neural network to achieve 95% accuracy in object detection across 1000 different categories. Key features include real-time processing, multi-object detection, and confidence scoring for each prediction.",
+        images: ["https://via.placeholder.com/800x400/2a2a2a/ffffff?text=AI+Image+Recognition", "https://via.placeholder.com/800x400/2a2a2a/ffffff?text=Real-time+Processing", "https://via.placeholder.com/800x400/2a2a2a/ffffff?text=Neural+Network+Architecture"],
+        technologies: ["Python", "TensorFlow", "OpenCV", "Deep Learning"]
+    },
+    project2: {
+        title: "E-commerce Platform Redesign",
+        description: "A complete overhaul of an existing e-commerce platform focusing on user experience and modern design principles. The project implemented a responsive design system, improved checkout flow, and added advanced filtering capabilities. The new design increased conversion rates by 40% and reduced cart abandonment by 25%.",
+        images: ["https://via.placeholder.com/800x400/2a2a2a/ffffff?text=E-commerce+Homepage", "https://via.placeholder.com/800x400/2a2a2a/ffffff?text=Product+Listing", "https://via.placeholder.com/800x400/2a2a2a/ffffff?text=Checkout+Process"],
+        technologies: ["React", "Node.js", "MongoDB", "Express"]
+    },
+    project3: {
+        title: "Data Analytics Dashboard",
+        description: "An interactive dashboard for visualizing complex business metrics and KPIs. Built using modern web technologies, the dashboard features real-time data updates, custom filtering options, and export capabilities. The system processes over 1 million data points daily and provides insights through intuitive visualizations.",
+        images: ["https://via.placeholder.com/800x400/2a2a2a/ffffff?text=Dashboard+Overview", "https://via.placeholder.com/800x400/2a2a2a/ffffff?text=Performance+Metrics", "https://via.placeholder.com/800x400/2a2a2a/ffffff?text=Data+Visualization"],
+        technologies: ["D3.js", "Vue.js", "Python", "PostgreSQL"]
     }
+};
+
+let slideIndex = 1;
+
+// Function to open project modal
+function openProject(projectId) {
+    const modal = document.getElementById('projectModal');
+    const project = projects[projectId];
+    
+    // Update modal content
+    document.getElementById('projectTitle').textContent = project.title;
+    document.getElementById('projectDescription').innerHTML = `<p>${project.description}</p>`;
+    
+    // Update technologies
+    const tagsContainer = document.getElementById('projectTags');
+    tagsContainer.innerHTML = project.technologies
+        .map(tech => `<span class="tech-tag">${tech}</span>`)
+        .join('');
+    
+    // Update carousel images
+    const slides = document.getElementsByClassName('carousel-slide');
+    for (let i = 0; i < slides.length; i++) {
+        if (project.images[i]) {
+            slides[i].querySelector('img').src = project.images[i];
+        }
+    }
+    
+    // Reset carousel to first slide
+    slideIndex = 1;
+    showSlides(slideIndex);
+    
+    // Show modal
+    modal.style.display = 'block';
 }
 
-// When the user clicks on <span> (x), close the modal
-for (var i = 0; i < spans.length; i++) {
-    spans[i].onclick = function() {
-        var modalId = this.parentElement.parentElement.id;
-        document.getElementById(modalId).style.display = "none";
-    }
+// Function to close modal
+function closeModal() {
+    const modal = document.getElementById('projectModal');
+    modal.style.display = 'none';
 }
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target.classList.contains('modal')) {
-        event.target.style.display = "none";
-    }
-}
-
-// Carousel functionality
-var slideIndex = 1;
-showSlides(slideIndex);
-
+// Carousel functions
 function plusSlides(n) {
     showSlides(slideIndex += n);
 }
@@ -60,4 +85,24 @@ function showSlides(n) {
     
     slides[slideIndex-1].style.display = "block";  
     dots[slideIndex-1].className += " active";
-} 
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Close modal when clicking the close button
+    const closeBtn = document.querySelector('.close');
+    if (closeBtn) {
+        closeBtn.onclick = closeModal;
+    }
+    
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+        const modal = document.getElementById('projectModal');
+        if (event.target === modal) {
+            closeModal();
+        }
+    }
+
+    // Show first slide initially
+    showSlides(slideIndex);
+}); 

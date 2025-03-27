@@ -10,27 +10,30 @@
         .modal {
             display: none;
             position: fixed;
-            z-index: 1;
+            z-index: 1000;
             left: 0;
             top: 0;
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0,0,0,0.4);
+            background-color: rgba(0,0,0,0.8);
         }
 
         .modal-content {
             background-color: #2a2a2a;
-            margin: 15% auto;
+            margin: 5% auto;
             padding: 40px;
-            width: 60%;
+            width: 80%;
             max-width: 800px;
             border-radius: 8px;
+            position: relative;
         }
 
         .close {
             color: #999;
-            float: right;
+            position: absolute;
+            right: 20px;
+            top: 10px;
             font-size: 28px;
             font-weight: bold;
             cursor: pointer;
@@ -53,7 +56,7 @@
 
         .project-content h2 {
             font-size: 2rem;
-            margin: 2.5rem 0 1.5rem;
+            margin: 0 0 1.5rem;
             font-weight: 600;
             color: #fff;
         }
@@ -75,24 +78,34 @@
             width: 100%;
             margin: 2rem 0;
             position: relative;
+            background-color: #1a1a1a;
+            padding: 20px;
+            border-radius: 8px;
         }
 
         .carousel-slide {
             display: none;
+            width: 100%;
+        }
+
+        .carousel-slide.active {
+            display: block;
         }
 
         .carousel-slide img {
             width: 100%;
             height: auto;
             border-radius: 4px;
+            max-height: 500px;
+            object-fit: contain;
         }
 
         .prev, .next {
             cursor: pointer;
             position: absolute;
             top: 50%;
+            transform: translateY(-50%);
             width: auto;
-            margin-top: -22px;
             padding: 16px;
             color: white;
             font-weight: bold;
@@ -101,11 +114,16 @@
             border-radius: 0 3px 3px 0;
             user-select: none;
             background-color: rgba(0,0,0,0.5);
+            text-decoration: none;
         }
 
         .next {
-            right: 0;
+            right: 20px;
             border-radius: 3px 0 0 3px;
+        }
+
+        .prev {
+            left: 20px;
         }
 
         .prev:hover, .next:hover {
@@ -147,6 +165,13 @@
         .button.secondary:hover {
             background-color: #3a3a3a;
         }
+
+        /* Projects grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
     </style>
 </head>
 <body>
@@ -173,34 +198,22 @@
                 <div class="project-card">
                     <h3>Project One</h3>
                     <p>Description of the first project and its key features</p>
-                    <div class="project-tags">
-                        <span>Technology</span>
-                        <span>Development</span>
-                    </div>
                     <div class="project-actions">
-                        <button class="button" id="openProject1">View Details</button>
+                        <button class="button" onclick="openProject('project1')">View Details</button>
                     </div>
                 </div>
                 <div class="project-card">
                     <h3>Project Two</h3>
                     <p>Description of the second project and its key features</p>
-                    <div class="project-tags">
-                        <span>Design</span>
-                        <span>UI/UX</span>
-                    </div>
                     <div class="project-actions">
-                        <button class="button" id="openProject2">View Details</button>
+                        <button class="button" onclick="openProject('project2')">View Details</button>
                     </div>
                 </div>
                 <div class="project-card">
                     <h3>Project Three</h3>
                     <p>Description of the third project and its key features</p>
-                    <div class="project-tags">
-                        <span>Research</span>
-                        <span>Analysis</span>
-                    </div>
                     <div class="project-actions">
-                        <button class="button" id="openProject3">View Details</button>
+                        <button class="button" onclick="openProject('project3')">View Details</button>
                     </div>
                 </div>
             </div>
@@ -214,21 +227,21 @@
             <div class="project-content">
                 <h2 id="projectTitle"></h2>
                 <div class="carousel-container">
-                    <div class="carousel-slide">
+                    <div class="carousel-slide fade">
                         <img src="" alt="Project Image 1">
                     </div>
-                    <div class="carousel-slide">
+                    <div class="carousel-slide fade">
                         <img src="" alt="Project Image 2">
                     </div>
-                    <div class="carousel-slide">
+                    <div class="carousel-slide fade">
                         <img src="" alt="Project Image 3">
                     </div>
-                    <a class="prev">&#10094;</a>
-                    <a class="next">&#10095;</a>
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
                     <div class="dot-container">
-                        <span class="dot" data-slide="1"></span>
-                        <span class="dot" data-slide="2"></span>
-                        <span class="dot" data-slide="3"></span>
+                        <span class="dot" onclick="currentSlide(1)"></span>
+                        <span class="dot" onclick="currentSlide(2)"></span>
+                        <span class="dot" onclick="currentSlide(3)"></span>
                     </div>
                 </div>
                 <div id="projectDescription"></div>
@@ -240,118 +253,6 @@
         </div>
     </div>
 
-    <script>
-        // Get the modal
-        var modal = document.getElementById("projectModal");
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-
-        // Get buttons that open the modal
-        var btn1 = document.getElementById("openProject1");
-        var btn2 = document.getElementById("openProject2");
-        var btn3 = document.getElementById("openProject3");
-
-        // Project data
-        const projects = {
-            project1: {
-                title: "Project One",
-                description: "Detailed description of Project One goes here...",
-                images: ["path/to/image1.jpg", "path/to/image2.jpg", "path/to/image3.jpg"],
-                technologies: ["Technology", "Development"]
-            },
-            project2: {
-                title: "Project Two",
-                description: "Detailed description of Project Two goes here...",
-                images: ["path/to/image1.jpg", "path/to/image2.jpg", "path/to/image3.jpg"],
-                technologies: ["Design", "UI/UX"]
-            },
-            project3: {
-                title: "Project Three",
-                description: "Detailed description of Project Three goes here...",
-                images: ["path/to/image1.jpg", "path/to/image2.jpg", "path/to/image3.jpg"],
-                technologies: ["Research", "Analysis"]
-            }
-        };
-
-        // Carousel functionality
-        let slideIndex = 1;
-        const slides = document.getElementsByClassName("carousel-slide");
-        const dots = document.getElementsByClassName("dot");
-        const prev = document.querySelector(".prev");
-        const next = document.querySelector(".next");
-
-        function showSlides(n) {
-            if (n > slides.length) slideIndex = 1;
-            if (n < 1) slideIndex = slides.length;
-
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-                dots[i].classList.remove("active");
-            }
-
-            slides[slideIndex - 1].style.display = "block";
-            dots[slideIndex - 1].classList.add("active");
-        }
-
-        function plusSlides(n) {
-            showSlides(slideIndex += n);
-        }
-
-        function currentSlide(n) {
-            showSlides(slideIndex = n);
-        }
-
-        // Add event listeners for carousel navigation
-        prev.addEventListener("click", () => plusSlides(-1));
-        next.addEventListener("click", () => plusSlides(1));
-        dots.forEach((dot, index) => {
-            dot.addEventListener("click", () => currentSlide(index + 1));
-        });
-
-        // Function to load project data
-        function loadProject(projectId) {
-            const project = projects[projectId];
-            document.getElementById("projectTitle").textContent = project.title;
-            document.getElementById("projectDescription").innerHTML = `<p>${project.description}</p>`;
-            
-            // Update project tags
-            const tagsContainer = document.getElementById("projectTags");
-            tagsContainer.innerHTML = project.technologies
-                .map(tech => `<span>${tech}</span>`)
-                .join("");
-
-            // Update carousel images
-            const slides = document.getElementsByClassName("carousel-slide");
-            for (let i = 0; i < slides.length; i++) {
-                if (project.images[i]) {
-                    slides[i].querySelector("img").src = project.images[i];
-                }
-            }
-
-            // Show first slide
-            showSlides(1);
-            
-            // Display modal
-            modal.style.display = "block";
-        }
-
-        // Add click handlers for project buttons
-        btn1.onclick = () => loadProject('project1');
-        btn2.onclick = () => loadProject('project2');
-        btn3.onclick = () => loadProject('project3');
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html> 
