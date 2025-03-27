@@ -51,27 +51,50 @@
                 </div>
             </div>
         </section>
+
+        <section class="content">
+            <h2>The Process of Ideation</h2>
+            <div class="ideation-carousel-container">
+                <div class="ideation-slide fade">
+                    <img src="placeholder1.jpg" alt="Ideation Process Step 1">
+                </div>
+                <div class="ideation-slide fade">
+                    <img src="placeholder2.jpg" alt="Ideation Process Step 2">
+                </div>
+                <div class="ideation-slide fade">
+                    <img src="placeholder3.jpg" alt="Ideation Process Step 3">
+                </div>
+                <a class="prev" onclick="plusIdeationSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusIdeationSlides(1)">&#10095;</a>
+                <div class="dot-container">
+                    <span class="dot" onclick="currentIdeationSlide(1)"></span>
+                    <span class="dot" onclick="currentIdeationSlide(2)"></span>
+                    <span class="dot" onclick="currentIdeationSlide(3)"></span>
+                </div>
+            </div>
+        </section>
     </main>
 
     <script>
-        let slideIndex = 1;
-        showSlides(slideIndex);
+        // Quote carousel functionality
+        let quoteSlideIndex = 1;
+        showQuoteSlides(quoteSlideIndex);
 
         function plusSlides(n) {
-            showSlides(slideIndex += n);
+            showQuoteSlides(quoteSlideIndex += n);
         }
 
         function currentSlide(n) {
-            showSlides(slideIndex = n);
+            showQuoteSlides(quoteSlideIndex = n);
         }
 
-        function showSlides(n) {
+        function showQuoteSlides(n) {
             var i;
             var slides = document.getElementsByClassName("quote-slide");
             var dots = document.getElementsByClassName("dot");
             
-            if (n > slides.length) {slideIndex = 1}    
-            if (n < 1) {slideIndex = slides.length}
+            if (n > slides.length) {quoteSlideIndex = 1}    
+            if (n < 1) {quoteSlideIndex = slides.length}
             
             for (i = 0; i < slides.length; i++) {
                 slides[i].style.display = "none";  
@@ -80,8 +103,39 @@
                 dots[i].className = dots[i].className.replace(" active", "");
             }
             
-            slides[slideIndex-1].style.display = "block";  
-            dots[slideIndex-1].className += " active";
+            slides[quoteSlideIndex-1].style.display = "block";  
+            dots[quoteSlideIndex-1].className += " active";
+        }
+
+        // Ideation carousel functionality
+        let ideationSlideIndex = 1;
+        showIdeationSlides(ideationSlideIndex);
+
+        function plusIdeationSlides(n) {
+            showIdeationSlides(ideationSlideIndex += n);
+        }
+
+        function currentIdeationSlide(n) {
+            showIdeationSlides(ideationSlideIndex = n);
+        }
+
+        function showIdeationSlides(n) {
+            var i;
+            var slides = document.getElementsByClassName("ideation-slide");
+            var dots = document.querySelectorAll('.ideation-carousel-container .dot');
+            
+            if (n > slides.length) {ideationSlideIndex = 1}    
+            if (n < 1) {ideationSlideIndex = slides.length}
+            
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            
+            slides[ideationSlideIndex-1].style.display = "block";  
+            dots[ideationSlideIndex-1].className += " active";
         }
     </script>
 </body>
