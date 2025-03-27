@@ -11,15 +11,15 @@ const projects = {
         technologies: ["Python", "JavaScript", "VSCode"]
     },
     project2: {
-        title: "Coming Soon!",
-        description: "...",
-        images: ["https://via.placeholder.com/800x400/2a2a2a/ffffff?text=E-commerce+Homepage", "https://via.placeholder.com/800x400/2a2a2a/ffffff?text=Product+Listing", "https://via.placeholder.com/800x400/2a2a2a/ffffff?text=Checkout+Process"],
-        technologies: ["...", "...", "...", "...", "..."]
+        title: "LLM Orchestration",
+        description: "Very basic LLM Orchestration engine.  Designed to operate via RAG & DAG (heavy use of AI to help make this).",
+        video: "https://www.youtube.com/embed/oR4bj00NbzU",
+        technologies: ["Python", "React", "LangChain", "Node.js"]
     },
     project3: {
         title: "Coming Soon!",
         description: "...",
-        images: ["https://via.placeholder.com/800x400/2a2a2a/ffffff?text=Dashboard+Overview", "https://via.placeholder.com/800x400/2a2a2a/ffffff?text=Performance+Metrics", "https://via.placeholder.com/800x400/2a2a2a/ffffff?text=Data+Visualization"],
+        images: ["...", "...", "..."],
         technologies: ["...", "...", "...", "...", "..."]
     }
 };
@@ -41,17 +41,54 @@ function openProject(projectId) {
         .map(tech => `<span class="tech-tag">${tech}</span>`)
         .join('');
     
-    // Update carousel images
-    const slides = document.getElementsByClassName('carousel-slide');
-    for (let i = 0; i < slides.length; i++) {
-        if (project.images[i]) {
-            slides[i].querySelector('img').src = project.images[i];
+    // Handle video or images
+    const carouselContainer = document.querySelector('.carousel-container');
+    if (project.video) {
+        // Replace carousel with YouTube embed
+        carouselContainer.innerHTML = `
+            <div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px;">
+                <iframe 
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                    src="${project.video}"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        `;
+    } else {
+        // Reset carousel for other projects
+        carouselContainer.innerHTML = `
+            <div class="carousel-slide fade">
+                <img src="" alt="Project Image 1">
+            </div>
+            <div class="carousel-slide fade">
+                <img src="" alt="Project Image 2">
+            </div>
+            <div class="carousel-slide fade">
+                <img src="" alt="Project Image 3">
+            </div>
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+            <div class="dot-container">
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+                <span class="dot" onclick="currentSlide(3)"></span>
+            </div>
+        `;
+        
+        // Update carousel images
+        const slides = document.getElementsByClassName('carousel-slide');
+        for (let i = 0; i < slides.length; i++) {
+            if (project.images[i]) {
+                slides[i].querySelector('img').src = project.images[i];
+            }
         }
+        
+        // Reset carousel to first slide
+        slideIndex = 1;
+        showSlides(slideIndex);
     }
-    
-    // Reset carousel to first slide
-    slideIndex = 1;
-    showSlides(slideIndex);
     
     // Show modal
     modal.style.display = 'block';
