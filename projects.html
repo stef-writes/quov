@@ -5,6 +5,149 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects | Personal Website</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Modal - Hidden by default */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #2a2a2a;
+            margin: 15% auto;
+            padding: 40px;
+            width: 60%;
+            max-width: 800px;
+            border-radius: 8px;
+        }
+
+        .close {
+            color: #999;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Project content styling */
+        .project-content {
+            font-family: Georgia, serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            margin: 0 auto;
+        }
+
+        .project-content h2 {
+            font-size: 2rem;
+            margin: 2.5rem 0 1.5rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .project-content h3 {
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .project-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* Carousel styles */
+        .carousel-container {
+            width: 100%;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .carousel-slide {
+            display: none;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -22px;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .dot-container {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .dot {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #3a3a3a;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+        .active, .dot:hover {
+            background-color: #8a2be2;
+        }
+
+        /* Project card button styles */
+        .project-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: auto;
+        }
+
+        .button.secondary {
+            background-color: #2a2a2a;
+            border: 1px solid #8a2be2;
+        }
+
+        .button.secondary:hover {
+            background-color: #3a3a3a;
+        }
+    </style>
 </head>
 <body>
     <nav class="main-nav">
@@ -34,7 +177,9 @@
                         <span>Technology</span>
                         <span>Development</span>
                     </div>
-                    <a href="#" class="button">View Project</a>
+                    <div class="project-actions">
+                        <button class="button" id="openProject1">View Details</button>
+                    </div>
                 </div>
                 <div class="project-card">
                     <h3>Project Two</h3>
@@ -43,7 +188,9 @@
                         <span>Design</span>
                         <span>UI/UX</span>
                     </div>
-                    <a href="#" class="button">View Project</a>
+                    <div class="project-actions">
+                        <button class="button" id="openProject2">View Details</button>
+                    </div>
                 </div>
                 <div class="project-card">
                     <h3>Project Three</h3>
@@ -52,12 +199,159 @@
                         <span>Research</span>
                         <span>Analysis</span>
                     </div>
-                    <a href="#" class="button">View Project</a>
+                    <div class="project-actions">
+                        <button class="button" id="openProject3">View Details</button>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <script src="script.js"></script>
+    <!-- Project Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="project-content">
+                <h2 id="projectTitle"></h2>
+                <div class="carousel-container">
+                    <div class="carousel-slide">
+                        <img src="" alt="Project Image 1">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="" alt="Project Image 2">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="" alt="Project Image 3">
+                    </div>
+                    <a class="prev">&#10094;</a>
+                    <a class="next">&#10095;</a>
+                    <div class="dot-container">
+                        <span class="dot" data-slide="1"></span>
+                        <span class="dot" data-slide="2"></span>
+                        <span class="dot" data-slide="3"></span>
+                    </div>
+                </div>
+                <div id="projectDescription"></div>
+                <div class="project-technologies">
+                    <h3>Technologies Used</h3>
+                    <div id="projectTags" class="project-tags"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById("projectModal");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // Get buttons that open the modal
+        var btn1 = document.getElementById("openProject1");
+        var btn2 = document.getElementById("openProject2");
+        var btn3 = document.getElementById("openProject3");
+
+        // Project data
+        const projects = {
+            project1: {
+                title: "Project One",
+                description: "Detailed description of Project One goes here...",
+                images: ["path/to/image1.jpg", "path/to/image2.jpg", "path/to/image3.jpg"],
+                technologies: ["Technology", "Development"]
+            },
+            project2: {
+                title: "Project Two",
+                description: "Detailed description of Project Two goes here...",
+                images: ["path/to/image1.jpg", "path/to/image2.jpg", "path/to/image3.jpg"],
+                technologies: ["Design", "UI/UX"]
+            },
+            project3: {
+                title: "Project Three",
+                description: "Detailed description of Project Three goes here...",
+                images: ["path/to/image1.jpg", "path/to/image2.jpg", "path/to/image3.jpg"],
+                technologies: ["Research", "Analysis"]
+            }
+        };
+
+        // Carousel functionality
+        let slideIndex = 1;
+        const slides = document.getElementsByClassName("carousel-slide");
+        const dots = document.getElementsByClassName("dot");
+        const prev = document.querySelector(".prev");
+        const next = document.querySelector(".next");
+
+        function showSlides(n) {
+            if (n > slides.length) slideIndex = 1;
+            if (n < 1) slideIndex = slides.length;
+
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+                dots[i].classList.remove("active");
+            }
+
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].classList.add("active");
+        }
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        // Add event listeners for carousel navigation
+        prev.addEventListener("click", () => plusSlides(-1));
+        next.addEventListener("click", () => plusSlides(1));
+        dots.forEach((dot, index) => {
+            dot.addEventListener("click", () => currentSlide(index + 1));
+        });
+
+        // Function to load project data
+        function loadProject(projectId) {
+            const project = projects[projectId];
+            document.getElementById("projectTitle").textContent = project.title;
+            document.getElementById("projectDescription").innerHTML = `<p>${project.description}</p>`;
+            
+            // Update project tags
+            const tagsContainer = document.getElementById("projectTags");
+            tagsContainer.innerHTML = project.technologies
+                .map(tech => `<span>${tech}</span>`)
+                .join("");
+
+            // Update carousel images
+            const slides = document.getElementsByClassName("carousel-slide");
+            for (let i = 0; i < slides.length; i++) {
+                if (project.images[i]) {
+                    slides[i].querySelector("img").src = project.images[i];
+                }
+            }
+
+            // Show first slide
+            showSlides(1);
+            
+            // Display modal
+            modal.style.display = "block";
+        }
+
+        // Add click handlers for project buttons
+        btn1.onclick = () => loadProject('project1');
+        btn2.onclick = () => loadProject('project2');
+        btn3.onclick = () => loadProject('project3');
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html> 
