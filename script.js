@@ -4,9 +4,9 @@ const projects = {
         title: "Basic Search Engine",
         description: "This is a basic search engine program that is comprised of: Search Index, Search Algorithm, Web Crawler, and a Command-Line Interface (CLI) Module",
         images: [
-            "assets/searchEngine/se1.png",
-            "assets/searchEngine/Screenshot 2025-03-27 at 1.15.24 PM.png",
-            "assets/searchEngine/Screenshot 2025-03-27 at 1.15.38 PM.png"
+            "assets/projects/project1/Screenshot 2025-03-27 at 1.13.47 PM.png",
+            "assets/projects/project1/Screenshot 2025-03-27 at 1.15.24 PM.png",
+            "assets/projects/project1/Screenshot 2025-03-27 at 1.15.38 PM.png"
         ],
         technologies: ["Python", "JavaScript", "VSCode"]
     },
