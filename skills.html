@@ -5,6 +5,107 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Skills | Personal Website</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .tab {
+            overflow: hidden;
+            border: 1px solid #2a2a2a;
+            background-color: #1a1a1a;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: all 0.3s ease;
+            font-size: 17px;
+            color: #e0e0e0;
+            border-right: 1px solid #2a2a2a;
+        }
+
+        .tab button:last-child {
+            border-right: none;
+        }
+
+        .tab button:hover {
+            background-color: #2a2a2a;
+            color: #8a2be2;
+        }
+
+        .tab button.active {
+            background-color: #2a2a2a;
+            color: #8a2be2;
+            font-weight: 600;
+        }
+
+        .tabcontent {
+            display: none;
+            padding: 20px;
+            border: 1px solid #2a2a2a;
+            border-top: none;
+            background-color: #1a1a1a;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .tabcontent h2 {
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .skill-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .skill-item {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #2a2a2a;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            background-color: #3a3a3a;
+            transform: translateX(5px);
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .skill-name {
+            color: #e0e0e0;
+            font-weight: 500;
+        }
+
+        .skill-percentage {
+            color: #8a2be2;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: #3a3a3a;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: #8a2be2;
+            border-radius: 4px;
+            transition: width 1s ease-in-out;
+        }
+    </style>
 </head>
 <body>
     <nav class="main-nav">
@@ -26,49 +127,136 @@
         </header>
 
         <section class="content">
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h2>Technical Skills</h2>
-                    <div class="skill-list">
-                        <div class="skill-item">
-                            <h3>Programming</h3>
-                            <ul>
-                                <li>JavaScript</li>
-                                <li>Python</li>
-                                <li>HTML/CSS</li>
-                            </ul>
-                        </div>
-                        <div class="skill-item">
-                            <h3>Currently Learning</h3>
-                            <ul>
-                                <li>DevOps</li>
-                                <li>Prompt Engineering</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+            <div class="tab">
+                <button class="tablinks active" onclick="openTab(event, 'Tab1')">Programming Languages</button>
+                <button class="tablinks" onclick="openTab(event, 'Tab2')">Frameworks</button>
+                <button class="tablinks" onclick="openTab(event, 'Tab3')">Tools</button>
+            </div>
 
-                <div class="skill-category">
-                    <h2>Soft Skills</h2>
-                    <div class="skill-list">
-                        <div class="skill-item">
-                            <h3>Communication</h3>
-                            <ul>
-                                <li>Explaining Complex Concepts Simply</li>
-                                <li>Mindful Listening</li>
-                                <li>Effective Questioning</li>
-                            </ul>
+            <div id="Tab1" class="tabcontent" style="display: block;">
+                <h2>Programming Languages</h2>
+                <ul class="skill-list">
+                    <li class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">JavaScript</span>
+                            <span class="skill-percentage">80%</span>
                         </div>
-                        <div class="skill-item">
-                            <h3>Problem Solving</h3>
-                            <ul>
-                                <li>Multi-Variable Problem Analysis</li>
-                            </ul>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 80%"></div>
                         </div>
-                    </div>
-                </div>
+                    </li>
+                    <li class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Python</span>
+                            <span class="skill-percentage">75%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75%"></div>
+                        </div>
+                    </li>
+                    <li class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">HTML/CSS</span>
+                            <span class="skill-percentage">90%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 90%"></div>
+                        </div>
+                    </li>
+                    <li class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Prompt Engineering</span>
+                            <span class="skill-percentage">85%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 85%"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="Tab2" class="tabcontent">
+                <h2>Frameworks</h2>
+                <ul class="skill-list">
+                    <li class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">React</span>
+                            <span class="skill-percentage">85%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 85%"></div>
+                        </div>
+                    </li>
+                    <li class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Node.js</span>
+                            <span class="skill-percentage">75%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75%"></div>
+                        </div>
+                    </li>
+                    <li class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Express</span>
+                            <span class="skill-percentage">80%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 80%"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="Tab3" class="tabcontent">
+                <h2>Tools</h2>
+                <ul class="skill-list">
+                    <li class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Git</span>
+                            <span class="skill-percentage">85%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 85%"></div>
+                        </div>
+                    </li>
+                    <li class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">VS Code</span>
+                            <span class="skill-percentage">90%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 90%"></div>
+                        </div>
+                    </li>
+                    <li class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Docker</span>
+                            <span class="skill-percentage">70%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 70%"></div>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </section>
     </main>
+
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
 </body>
 </html> 
