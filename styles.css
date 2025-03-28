@@ -112,41 +112,6 @@ body {
     line-height: 1.8;
 }
 
-/* Projects */
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
-.project-card {
-    background-color: #2a2a2a;
-    padding: 2rem;
-    border-radius: 8px;
-    transition: transform 0.3s ease;
-}
-
-.project-card:hover {
-    transform: translateY(-5px);
-}
-
-.project-card h3 {
-    color: #ffffff;
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-}
-
-.project-card p {
-    margin-bottom: 1.5rem;
-    color: #b0b0b0;
-}
-
-.project-actions {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-}
-
 /* Modal */
 .modal {
     display: none;
@@ -437,10 +402,6 @@ footer {
         padding: 1rem;
     }
 
-    .project-actions {
-        flex-direction: column;
-    }
-
     .button {
         width: 100%;
         text-align: center;
@@ -577,4 +538,82 @@ footer {
     color: #ffffff;
     font-size: 2rem;
     text-align: center;
+}
+
+/* Timeline Styles */
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #2a2a2a;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 40px;
+    padding-left: 80px;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: 44px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #8a2be2;
+    border: 3px solid #1a1a1a;
+    box-shadow: 0 0 0 2px #8a2be2;
+}
+
+.timeline-content {
+    background: #2a2a2a;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border: 1px solid #3a3a3a;
+}
+
+.timeline-content h3 {
+    margin: 0 0 10px 0;
+    color: #ffffff;
+}
+
+.timeline-content .duration {
+    color: #8a2be2;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+.timeline-content p {
+    margin: 0 0 15px 0;
+    line-height: 1.6;
+    color: #b0b0b0;
+}
+
+.timeline-content .button {
+    margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+    .timeline::before {
+        left: 30px;
+    }
+    
+    .timeline-item {
+        padding-left: 60px;
+    }
+    
+    .timeline-dot {
+        left: 24px;
+    }
 } 
