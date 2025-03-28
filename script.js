@@ -8,7 +8,8 @@ const projects = {
             "assets/projects/project1/proj11.png",
             "assets/projects/project1/proj111.png"
         ],
-        technologies: ["Python", "JavaScript", "VSCode"]
+        technologies: ["Python", "JavaScript", "VSCode"],
+        github: "https://github.com/stef-writes/search-engine"
     },
     project2: {
         title: "LLM Orchestration",
@@ -41,11 +42,12 @@ function openProject(projectId) {
     document.getElementById('projectTitle').textContent = project.title;
     document.getElementById('projectDescription').innerHTML = `<p>${project.description}</p>`;
     
-    // Update technologies
+    // Update technologies and add GitHub link
     const tagsContainer = document.getElementById('projectTags');
-    tagsContainer.innerHTML = project.technologies
-        .map(tech => `<span class="tech-tag">${tech}</span>`)
-        .join('');
+    tagsContainer.innerHTML = `
+        ${project.technologies.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+        ${project.github ? `<a href="${project.github}" target="_blank" class="button" style="margin-left: 1rem;">GitHub</a>` : ''}
+    `;
     
     // Handle video or images
     const carouselContainer = document.querySelector('.carousel-container');
