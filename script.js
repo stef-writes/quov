@@ -12,8 +12,8 @@ const projects = {
         github: "https://github.com/stef-writes/search-engine"
     },
     project2: {
-        title: "LLM Orchestration",
-        description: "Very basic LLM Orchestration engine.  Designed to operate via RAG & DAG (heavy use of AI to help make this).",
+        title: "LLM Workflow Automation",
+        description: "Very basic LLM workflow automation engine.  Designed to operate via RAG & DAG (heavy use of AI to help make this).",
         video: "https://www.youtube.com/embed/oR4bj00NbzU",
         technologies: ["Python", "React", "LangChain", "Node.js"]
     },
