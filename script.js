@@ -17,10 +17,10 @@ const projects = {
         technologies: ["Python", "React", "LangChain", "Node.js"]
     },
     project3: {
-        title: "Coming Soon!",
-        description: "...",
-        images: ["...", "...", "..."],
-        technologies: ["...", "...", "...", "...", "..."]
+        title: "Visualize Entropy & Complexity",
+        description: "Co-Coding with AI to create a simple data vizualization of the relationship between entropy & complexity.",
+        video: "https://www.youtube.com/embed/CP6_ffEmzd4",
+        technologies: ["Claude", "Cursor"]
     }
 };
 
