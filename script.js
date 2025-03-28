@@ -18,9 +18,15 @@ const projects = {
     },
     project3: {
         title: "Visualize Entropy & Complexity",
-        description: "Co-Coding with AI to create a simple data vizualization of the relationship between entropy & complexity.",
+        description: "Co-coding with AI to create a simple data vizualization of the relationship between entropy & complexity.",
         video: "https://www.youtube.com/embed/CP6_ffEmzd4",
         technologies: ["Claude", "Cursor"]
+    },
+    project4: {
+        title: "Simulating Synesthesia (Poorly)",
+        description: "Co-coding with AI to simulate synthesia by mapping sound to color based physical properties like frequency.",
+        video: "https://www.youtube.com/embed/IbGvLDrtJqE",
+        technologies: ["Claude", "Deepseek", "NumPy", "Matplotlib"]
     }
 };
 
