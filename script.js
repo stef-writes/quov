@@ -30,9 +30,9 @@ const projects = {
     }
 };
 
-let slideIndex = 1;
+var slideIndex = 1;
 
-// Function to open project modal
+// Open project modal
 function openProject(projectId) {
     const modal = document.getElementById('projectModal');
     const project = projects[projectId];
@@ -50,7 +50,7 @@ function openProject(projectId) {
     // Handle video or images
     const carouselContainer = document.querySelector('.carousel-container');
     if (project.video) {
-        // Replace carousel with YouTube embed
+        // Show video
         carouselContainer.innerHTML = `
             <div class="video-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px;">
                 <iframe 
@@ -63,16 +63,16 @@ function openProject(projectId) {
             </div>
         `;
     } else {
-        // Reset carousel for other projects
+        // Show image carousel
         carouselContainer.innerHTML = `
             <div class="carousel-slide fade">
-                <img src="" alt="Project Image 1">
+                <img src="${project.images[0]}" alt="Project Image 1">
             </div>
             <div class="carousel-slide fade">
-                <img src="" alt="Project Image 2">
+                <img src="${project.images[1]}" alt="Project Image 2">
             </div>
             <div class="carousel-slide fade">
-                <img src="" alt="Project Image 3">
+                <img src="${project.images[2]}" alt="Project Image 3">
             </div>
             <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
             <a class="next" onclick="plusSlides(1)">&#10095;</a>
@@ -82,28 +82,15 @@ function openProject(projectId) {
                 <span class="dot" onclick="currentSlide(3)"></span>
             </div>
         `;
-        
-        // Update carousel images
-        const slides = document.getElementsByClassName('carousel-slide');
-        for (let i = 0; i < slides.length; i++) {
-            if (project.images[i]) {
-                slides[i].querySelector('img').src = project.images[i];
-            }
-        }
-        
-        // Reset carousel to first slide
-        slideIndex = 1;
         showSlides(slideIndex);
     }
     
-    // Show modal
     modal.style.display = 'block';
 }
 
-// Function to close modal
+// Close modal
 function closeModal() {
-    const modal = document.getElementById('projectModal');
-    modal.style.display = 'none';
+    document.getElementById('projectModal').style.display = 'none';
 }
 
 // Carousel functions
@@ -119,37 +106,30 @@ function showSlides(n) {
     var i;
     var slides = document.getElementsByClassName("carousel-slide");
     var dots = document.getElementsByClassName("dot");
-    
     if (n > slides.length) {slideIndex = 1}    
     if (n < 1) {slideIndex = slides.length}
-    
     for (i = 0; i < slides.length; i++) {
         slides[i].style.display = "none";  
     }
     for (i = 0; i < dots.length; i++) {
         dots[i].className = dots[i].className.replace(" active", "");
     }
-    
     slides[slideIndex-1].style.display = "block";  
     dots[slideIndex-1].className += " active";
 }
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Close modal when clicking the close button
+    // Close modal when clicking the close button or outside
     const closeBtn = document.querySelector('.close');
     if (closeBtn) {
         closeBtn.onclick = closeModal;
     }
     
-    // Close modal when clicking outside
     window.onclick = function(event) {
         const modal = document.getElementById('projectModal');
         if (event.target === modal) {
             closeModal();
         }
     }
-
-    // Show first slide initially
-    showSlides(slideIndex);
 }); 
